@@ -1,0 +1,4 @@
+* [0.5] - 2015-04-29
+** Changed
+ - Forked off my canopy clustering project
+ - Read text files in a directory

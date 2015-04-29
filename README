@@ -1,0 +1,52 @@
+README
+
+This project implements a compression-based distance function [1] in
+order to produce a similarity matrix given a list of files in a source
+directory. This similarity matrix can be used for clustering etc.
+
+The code is implemented in C++ using boost libraries and OpenMP for
+the parallelisation of the distance computations.
+
+This implementation scans the source directory for any files and
+computes pair-wise distances (excluding the symmetric
+counter-parts). The files can be named in any way. The program
+extracts the basename of the file as an identifier.
+
+CONFIGURATION
+
+OpenMP can be enabled using the --enable-openmp flag at the
+configuration step.
+
+
+EXECUTION
+
+The following command-line parameters are provided:
+
+General Configuration:
+  --help                produce help message
+  --version             show the version
+
+I/O Configuration:
+  --result arg (=./results) results directory.
+  --source arg (=./sources) source directory containing the files
+
+NCD Configuration:
+  --normalise arg (=1)  normalise if the maximum distance > 1
+
+The source directory and the results directory have to be present. The
+program only scans files in the source directory. It does not
+recursively find the files in any sub-directories of the source
+folder.
+
+Only one-directional distances are computed (upper triangular form)
+even though the NCD distance computation [2] may not be exactly
+equal. However, for large enough sequences this in-equality is
+negligible. The distance computation can be normalised with the
+"normalise" flag in order for the distances to be strictly below or
+equal to 1.
+
+
+[1] Clustering by compression
+    by: R. Cilibrasi, P. M. B. Vitanyi
+    Information Theory, IEEE Transactions on, Vol. 51, No. 4. (April
+    2005), pp. 1523-1545, doi:10.1109/tit.2005.844059
